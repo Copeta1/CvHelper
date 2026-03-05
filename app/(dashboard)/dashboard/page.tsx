@@ -14,14 +14,12 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  // Dohvati profil
   const { data: profile } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", user.id)
     .single();
 
-  // Dohvati CV-ove
   const { data: cvs } = await supabase
     .from("cvs")
     .select("*")
@@ -60,7 +58,6 @@ export default async function DashboardPage() {
       />
 
       <div className="max-w-5xl mx-auto p-8">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-stone-800">
             Dobrodošli, {profile?.first_name}! 👋
@@ -70,7 +67,6 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-3 gap-4 mb-8">
           {stats.map((stat) => (
             <div
@@ -88,7 +84,6 @@ export default async function DashboardPage() {
           ))}
         </div>
 
-        {/* CV Lista */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-stone-800">Moji CV-ovi</h2>
           <Link
@@ -99,7 +94,6 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
-        {/* Empty state ili lista */}
         {totalCvs === 0 ? (
           <div className="bg-white rounded-xl border border-stone-200 p-12 text-center">
             <div className="text-5xl mb-4">📄</div>
