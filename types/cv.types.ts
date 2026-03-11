@@ -5,7 +5,8 @@ export interface CVPersonalInfo {
     email: string;
     phone?: string;
     location?: string;
-    linkedIn?: string;
+    linkedin?: string;
+    github?: string;
     website?: string;
     summary?: string;
 }
@@ -32,7 +33,7 @@ export interface CVEducation {
 }
 
 export interface CVSkills {
-    tehnical: string[];
+    technical: string[] 
     soft: string[];
     languages: string[];
 }

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Link from "next/link";
 import { createClient } from "@/lib/superbase/server";
+import { FileText, Sparkles, BarChart3 } from "lucide-react";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -41,10 +42,10 @@ export default async function DashboardPage() {
       : null;
 
   const stats = [
-    { icon: "📄", value: totalCvs, label: "CV-ovi" },
-    { icon: "✨", value: analyzedCvs, label: "Analizirani" },
+    { icon: FileText, value: totalCvs, label: "CV-ovi" },
+    { icon: Sparkles, value: analyzedCvs, label: "Analizirani" },
     {
-      icon: "📊",
+      icon: BarChart3,
       value: avgScore ? `${avgScore}/100` : "-",
       label: "Prosječni score",
     },
@@ -60,7 +61,7 @@ export default async function DashboardPage() {
       <div className="max-w-5xl mx-auto p-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-stone-800">
-            Dobrodošli, {profile?.first_name}! 👋
+            Dobrodošli, {profile?.first_name}!
           </h1>
           <p className="text-stone-500 mt-1">
             Kreirajte CV koji će vas istaknuti
@@ -73,7 +74,9 @@ export default async function DashboardPage() {
               key={stat.label}
               className="bg-white rounded-xl border border-stone-200 p-5 flex items-center gap-4"
             >
-              <div className="text-4xl">{stat.icon}</div>
+              <div className="bg-stone-100 p-3 rounded-lg">
+                <stat.icon className="w-5 h-5 text-stone-600" />
+              </div>
               <div>
                 <div className="text-2xl font-bold text-stone-800">
                   {stat.value}
@@ -118,7 +121,9 @@ export default async function DashboardPage() {
                 className="bg-white rounded-xl border border-stone-200 p-5 flex items-center justify-between"
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-2xl">📄</span>
+                  <div className="bg-stone-100 p-2 rounded-lg">
+                    <FileText className="w-5 h-5 text-stone-600" />
+                  </div>
                   <div>
                     <h3 className="font-medium text-stone-800">{cv.title}</h3>
                     <p className="text-sm text-stone-500">
