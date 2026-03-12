@@ -8,6 +8,7 @@ import PersonalInfoTab from "@/components/cv/tabs/PersonalInfoTab";
 import ExperienceTab from "./tabs/ExperienceTab";
 import { User, Briefcase, GraduationCap, Wrench } from "lucide-react";
 import EducationTab from "./tabs/EducationTab";
+import SkillsTab from "./tabs/SkillsTab";
 
 interface CVEditorProps {
   cv: {
@@ -125,7 +126,10 @@ export default function CVEditor({ cv }: CVEditorProps) {
           />
         )}
         {activeTab === "skills" && (
-          <div className="text-stone-500 text-sm">Vještine - coming soon</div>
+          <SkillsTab
+            data={data.skills}
+            onChange={(skills) => setData({ ...data, skills })}
+          />
         )}
       </div>
     </div>
