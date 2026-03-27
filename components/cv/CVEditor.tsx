@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { createClient } from "@/lib/superbase/client";
 import { useRouter } from "next/navigation";
-import { CVData } from "@/types/cv.types";
+import { AISuggestion, CVData } from "@/types/cv.types";
 import PersonalInfoTab from "@/components/cv/tabs/PersonalInfoTab";
 import ExperienceTab from "./tabs/ExperienceTab";
 import { User, Briefcase, GraduationCap, Wrench } from "lucide-react";
 import EducationTab from "./tabs/EducationTab";
 import SkillsTab from "./tabs/SkillsTab";
+import AIAnalysis from "./AIAnalysis";
 
 interface CVEditorProps {
   cv: {
@@ -66,6 +67,17 @@ export default function CVEditor({ cv }: CVEditorProps) {
     { key: "education", label: "Obrazovanje", icon: GraduationCap },
     { key: "skills", label: "Vještine", icon: Wrench },
   ];
+
+  const handleAnalysisComplete = async (suggestions: AISuggestion) => {
+    await supabase
+      .from("cvs")
+      .update({
+        ai_suggestions: suggestions,
+        status: "analyzed",
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", cv.id);
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-8">
@@ -132,6 +144,7 @@ export default function CVEditor({ cv }: CVEditorProps) {
           />
         )}
       </div>
+      <AIAnalysis cvData={data} onAnalysisComplete={handleAnalysisComplete} />
     </div>
   );
 }
