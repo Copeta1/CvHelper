@@ -42,8 +42,6 @@ Odgovori ISKLJUČIVO u JSON formatu bez ikakvog dodatnog teksta:
     : response[0].text
   : response.message.content
 
-console.log('rawText:', rawText)
-console.log('rawText type:', typeof rawText)
 
 const text = String(rawText)
 
